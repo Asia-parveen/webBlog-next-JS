@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* styles/globals.css */
+
+/* Custom CSS for border color change on click */
+.image-container {
+    border: 2px solid #ccc; /* Default light border color */
+    transition: all 0.3s ease; /* Smooth transition for border change */
+  }
+  
+  .image-container:focus-within {
+    border-color: #1D3557; /* Dark blue border color when clicked */
+  }
+  
+  .image-container:hover {
+    border-color:gray; /* Light gold border color on hover */
+  }
+  
