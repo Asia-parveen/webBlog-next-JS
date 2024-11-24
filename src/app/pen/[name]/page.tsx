@@ -113,7 +113,7 @@ const PenDetail = ({ params }: Props) => {
 
        
         {comments.length === 0 ? (
-          <p className="text-gray-500 text-center">
+          <p className="text-[#1D3557] font-semibold">
             No comments yet. Be the first to comment!
           </p>
         ) : (
