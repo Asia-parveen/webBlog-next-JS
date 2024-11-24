@@ -13,18 +13,21 @@ interface Comment {
 }
 
 const BookDetails = ({ params }: { params: { id: string } }) => {
-  const book = books.find((b) => b.id === params.id);
-
-  if (!book) return notFound();
-
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
   const [userImage, setUserImage] = useState<string>("");
 
+  const book = books.find((b) => b.id === params.id);
+
+  if (!book) {
+    notFound();
+    return null;
+  }
+
   const handleAddComment = () => {
     if (newComment.trim() && userImage) {
-      setComments([
-        ...comments,
+      setComments((prevComments) => [
+        ...prevComments,
         { text: newComment.trim(), date: new Date(), image: userImage },
       ]);
       setNewComment("");
@@ -70,8 +73,11 @@ const BookDetails = ({ params }: { params: { id: string } }) => {
         </p>
         <p className="text-gray-700 leading-relaxed mb-6">
           <span className="font-semibold text-gray-800">Description:</span>{" "}
-          {book.description}<br></br>
-          <button className="px-5 py-2 bg-[#1D3557] text-white mt-8 rounded-md hover:bg-[#5A8F7D]">Place Order</button>
+          {book.description}
+          <br />
+          <button className="px-5 py-2 bg-[#1D3557] text-white mt-8 rounded-md hover:bg-[#5A8F7D]">
+            Place Order
+          </button>
         </p>
       </div>
 
@@ -83,11 +89,11 @@ const BookDetails = ({ params }: { params: { id: string } }) => {
       </Link>
 
       <div className="mt-12">
-        <h2 className="text-3xl font-bold mb-6 text-[#1D3557]">Leave your Comment here:</h2>
+        <h2 className="text-3xl font-bold mb-6 text-[#1D3557]">
+          Leave your Comment here:
+        </h2>
 
         <div className="mb-8">
-        
-
           <textarea
             className="w-full p-4 border rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-[#F1C40F] resize-none mb-4"
             rows={4}
@@ -95,7 +101,7 @@ const BookDetails = ({ params }: { params: { id: string } }) => {
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
           />
-            <label className="block mb-4">
+          <label className="block mb-4">
             <span className="font-bold text-[#1D3557]">Upload Your Image</span>
             <input
               type="file"

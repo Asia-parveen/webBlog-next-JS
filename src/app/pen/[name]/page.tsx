@@ -19,15 +19,16 @@ const PenDetail = ({ params }: Props) => {
     (pen) => pen.name.toLowerCase() === penName.toLowerCase()
   );
 
-  if (!pen) {
-    return notFound();
-  }
-
+ 
   const [comments, setComments] = useState<
     { id: number; text: string; userImage: string }[]
   >([]);
   const [newComment, setNewComment] = useState("");
   const [userImage, setUserImage] = useState<File | null>(null);
+
+  if (!pen) {
+    return notFound();
+  }
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -68,9 +69,12 @@ const PenDetail = ({ params }: Props) => {
       <p className="text-lg text-gray-700 mb-4 font-semibold">
         {pen.description}
       </p>
-      <p className="text-lg text-gray-700 mb-6"><span className="font-bold text-yellow-700">Details:</span> { pen.content}<br></br>
-        <button className="px-5 py-2 bg-[#1D3557] text-white mt-8 rounded-md hover:bg-[#5A8F7D]">Place Order</button>
-
+      <p className="text-lg text-gray-700 mb-6">
+        <span className="font-bold text-yellow-700">Details:</span> {pen.content}
+        <br />
+        <button className="px-5 py-2 bg-[#1D3557] text-white mt-8 rounded-md hover:bg-[#5A8F7D]">
+          Place Order
+        </button>
       </p>
 
       <div className="mt-10">
@@ -107,7 +111,7 @@ const PenDetail = ({ params }: Props) => {
           </button>
         </form>
 
-        {/* Display Comments */}
+       
         {comments.length === 0 ? (
           <p className="text-gray-500 text-center">
             No comments yet. Be the first to comment!
@@ -147,4 +151,7 @@ const PenDetail = ({ params }: Props) => {
 };
 
 export default PenDetail;
+
+
+
 
